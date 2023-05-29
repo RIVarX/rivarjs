@@ -33,7 +33,7 @@ The **lift** function transforms a function operating on values to a function op
 Each of the lifted variables need to be connected to a visual element.
 
 ### react
-
+**(A full example is available in Examples/react_rivar_drug_administration**)<br><br>
 In react, a front-end component should be connected to the RIVar:
 ```
 <MyRIVarComponent rivar={myRIVar}/> 
