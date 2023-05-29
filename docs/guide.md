@@ -67,15 +67,9 @@ By calling **this.change**, you can update the associated RIVar with the new val
 
 
 ### Vanilla JavaScript
-Like connecting Subject of rxjs from which RIVar is derived.
-
-
-
-## Drug Administration Example in Vanilla JavaScript
-view the source of the page:
-https://rivarx.github.io/Evaluation/RIVar/DrugAdministration.html
-
-## Drug Administration Example in React
+Like connecting [Subject](https://rxjs.dev/guide/subject) of RxJS from which RIVar is derived.<br>
+A full example is available in
+https://rivarx.github.io/Evaluation/RIVar/DrugAdministration.html. (by "view source")
 
 
 
