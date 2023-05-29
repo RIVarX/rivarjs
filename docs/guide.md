@@ -34,10 +34,12 @@ Each of the lifted variables need to be connected to a visual element.
 
 ### react
 
-The **RIVarComponent** serves as a base class for creating front-end components related to RIVar, to be used similar to:<br>
+In react, a front-end component should be connected to the RIVar:
 ```
 <MyRIVarComponent rivar={myRIVar}/> 
 ```
+
+The **RIVarComponent** serves as a base class for creating front-end components related to RIVar.<br>
 To create your component, import RIVarComponent from 'rivarjs/binders/react':<br>
 ```
 import { RIVarComponent } from 'rivarjs/binders/react';
