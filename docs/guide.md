@@ -1,3 +1,12 @@
+# Introduction
+`rivarjs` is a decentralized state management library that automates changes. It harmonizes concepts from the object-oriented programming (OOP) and functional reactive programming (FRP) paradigms. At its core, `rivarjs` introduces a datatype called `RIVar`, which stands for *Reactive Instance Variable*.<br><br> 
+
+The term *Reactive* signifies that assignments initiate dependencies, ensuring continuous updates in response to changes. The term *Instance* implies that assignments can be performed externally, facilitating information hiding.
+
+## How It Works
+
+Each variable in rivarjs is implemented as an observable stream, which is generated from the various observable streams of the assigned expressions.  This design enables independent assignments within multiple contexts that are hidden from each other. 
+
 # Installation
 To use rivarjs, you have two options. First, you can install it using npm by running the following command:<br>
 
@@ -5,7 +14,7 @@ To use rivarjs, you have two options. First, you can install it using npm by run
 npm install rivarjs
 ```
 
-Alternatively, if you prefer including the library in a web page, you need to ensure that the required dependencies, rxjs and rivarjs, are included. You can achieve this by adding the following script tags to your HTML file:<br>
+Alternatively, for a HTML page, if you may include rivar.umd.js script and the required dependency rxjs:<br>
 ```
 <script src="https://unpkg.com/rxjs@^7/dist/bundles/rxjs.umd.min.js"></script>
 <script src="https://unpkg.com/rivarjs/dist/rivar.umd.js"></script>
