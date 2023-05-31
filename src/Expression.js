@@ -5,25 +5,13 @@ class Expression extends Observable {
  
 }
 export function lift(func, operand1, operand2) {
-	const obs1 =  SignalExtension.monotonic(operand1);
-	const obs2 =  SignalExtension.monotonic(operand2);
-	const combinedObs = combineLatest([obs1, obs2], (x, y) => SignalExtension.produceResult(func, x, y));
+	
+  const firstStream = SignalExtension.monotonic(operand1);
+	const secondStream = SignalExtension.monotonic(operand2);
+	
+  const combinedStream = combineLatest([firstStream, secondStream],
+                                          (x, y) => SignalExtension.produceResult(func, x, y));
 
-  return combinedObs.pipe(share());
+  return combinedStream.pipe(share());
 
-/*	const refCountedObs = combinedObs.pipe(
-	  publish(),
-	  refCount()
-	);
-	 return new Expression(refCountedObs);*/
-
- /* const stream = Observable
-    .combineLatest(
-      SignalExtension.monotonic(operand1),
-      SignalExtension.monotonic(operand2),
-      (x, y) => SignalExtension.produceResult(func, x, y)
-    )
-    .publish()
-    .refCount();
-  return new Expression(stream);*/
 };

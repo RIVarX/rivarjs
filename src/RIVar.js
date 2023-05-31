@@ -37,12 +37,7 @@ export class RIVar extends Subject {
    }
     
    
-  }
-
- /* subscribe(next) {
-    return super.subscribe().distinctUntilChanged((prev, curr) => prev.compareTo(curr) === 0).subscribe(next);
-  }*/
-  
+  }  
 
 }
 

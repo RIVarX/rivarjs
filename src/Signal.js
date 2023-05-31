@@ -26,53 +26,19 @@ IsPrioritized(signal, thanSignal) {
 
 
   if (otherSignalOnlySet.length > 0 && SignalOnlySet.length > 0 && SignalOnlySet.every(newSignal => otherSignalOnlySet.every(oldSignal => newSignal > oldSignal))) {
-    // rule A
+    // fresh data
     return true;
   }
   
   if (signal != null && signalSet.length > 0 && SignalOnlySet.length === 0 && otherSignalOnlySet.length > 0) {
-    // rule B
+    // depends on less amount of events
     return true;
   }
 
   return false;
 }
 
-/*
 
-  compareTo(otherSignal) {
-    const signalSet = this.prioritySet;
-    const otherSignalSet = otherSignal.prioritySet;
-
-    const SignalOnlySet = signalSet.filter((p) => !otherSignalSet.includes(p));
-    const otherSignalOnlySet = otherSignalSet.filter((p) => !signalSet.includes(p));
-
-    if (
-      otherSignalOnlySet.length > 0 &&
-      SignalOnlySet.length > 0 &&
-      SignalOnlySet.every((newSignal) =>
-        otherSignalOnlySet.every((oldSignal) => newSignal > oldSignal)
-      )
-    ) {
-      //rule A
-      return -1;
-    }
-    if (
-      this.value !== null &&
-      signalSet.length > 0 &&
-      !SignalOnlySet.length &&
-      otherSignalOnlySet.length > 0
-    ) {
-      //rule B (extra, comes from cycle)
-      //super set {1} compare to {1,2,3}, there is no new
-      //{1} > {1,2,3}
-      //but null < {1,0}
-      return -1;
-    }
-
-    return 0;
-  }
-*/
   equals(other) {
     if (this.value !== other.value) {
       return false;
