@@ -3,7 +3,7 @@ import { RIVarComponent } from 'rivarjs/binders/react';
 export class InputField extends RIVarComponent {
   
    handleChange = (event) => {
-    this.change(event.target.value);
+    super.change(event.target.value);
   }
  
   render() {
@@ -11,7 +11,7 @@ export class InputField extends RIVarComponent {
         <input
           type="number"
           value={this.state.value}
-          onChange={this.handleChange}  />
+          onChange={event=>this.change(event.target.value) }  />
     );
   }
 }
