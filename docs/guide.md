@@ -76,48 +76,68 @@ Classes can be created as a unit of information, containing *private* variables 
   }
 ```
 
-# Binders
+# Binding
 
-Each of the lifted variables need to be connected to a visual element.
 
-## react
-(A full example is available in Examples/react_rivar_drug_administration)<br><br>
-In react, a front-end component should be connected to the RIVar:
+
+## Binding in React
+
+`React components` are connected to instances of `RIVar` by passing them as a prop named 'rivar'.
+
 ```
 <MyRIVarComponent rivar={myRIVar}/> 
 ```
+`rivarjs` provides a generic React Component named `RIVarComponent`.
 
-The *RIVarComponent* serves as a base class for creating front-end components related to RIVar.<br>
-To create your component, import RIVarComponent from 'rivarjs/binders/react':<br>
+To create your component, start by importing `RIVarComponent` from 'rivarjs/binders/react':<br>
 ```
 import { RIVarComponent } from 'rivarjs/binders/react';
 ```
-Then, define your component class MyRIVarComponent by extending RIVarComponent:<br>
+
+To implement your custom component, you can extend the `RIVarComponent` class and override the `render()` function based on your specific requirements. Within the `render()` function, you can determine the content to be rendered based on the `this.state.value`, which corresponds to the current value of the `rivar` (from the prop). If a user change is detected in the value, you can call the `this.change()` method.
+
+
 ```
 class MyRIVarComponent extends RIVarComponent {
-  // Implement the render function which includes this.state.value
   render() {
-    // Your rendering logic here
+    return (
+        <input
+          value={this.state.value}
+          onChange={event=>this.change(event.target.value) }  />
+    );
   }
 }
 ```
-Within the render function, you can customize the view based on your requirements and access the current value of the component's state using *this.state.value*.<br><br>
-
-Additionally, when the user interacts with the elements rendered by your component, if there are changes, you can trigger the *this.change* method provided by RIVarComponent to update the relevant RIVar:<br>
-```
-// Example usage of this.change in response to user interaction
-handleInputChange(event) {
-  // Handle user input
-  this.change(event.target.value);
-}
-```
-By calling *this.change*, you can update the associated RIVar with the new value resulting from the user's interaction.<br>
 
 
-### Vanilla JavaScript
+## Binding with pure JavaScript
 Like connecting [Subject](https://rxjs.dev/guide/subject) of RxJS from which RIVar is derived.<br>
 A full example is available in
 https://rivarx.github.io/Evaluation/RIVar/DrugAdministration.html. (by "view source")
+
+Each of the lifted variables need to be connected to a visual element.
+
+```
+    function bind(inputID, variable) {
+
+      var input = document.getElementById(inputID);
+
+      input.addEventListener('input', (event) => {
+        const value = event.target.value;
+        variable.next(new Signal(value));
+        input.style.fontStyle = "normal";
+      });
+
+      variable.subscribe((signal) => {
+        if (input.value !== signal.value.toString()) {
+          input.value = signal.value.toString();
+          input.style.fontStyle = "italic";
+        }
+      });
+
+    }
+```
+
 
 # Installation
 To use rivarjs, you have two options. First, you can install it using npm by running the following command:<br>
