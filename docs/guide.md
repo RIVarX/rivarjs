@@ -82,19 +82,19 @@ Classes can be created as a unit of information, containing *private* variables 
 
 ## Binding in React
 
-`React components` are connected to instances of `RIVar` by passing them as a prop named 'rivar'.
+`React components` are connected to instances of `RIVar` by passing them as a `prop` named `rivar`.
 
 ```
 <MyRIVarComponent rivar={myRIVar}/> 
 ```
-`rivarjs` provides a generic React Component named `RIVarComponent`.
+`rivarjs` provides a generic `React Component` named `RIVarComponent`.
 
 To create your component, start by importing `RIVarComponent` from 'rivarjs/binders/react':<br>
 ```
 import { RIVarComponent } from 'rivarjs/binders/react';
 ```
 
-To implement your custom component, you can extend the `RIVarComponent` class and override the `render()` function based on your specific requirements. Within the `render()` function, you can determine the content to be rendered based on the `this.state.value`, which corresponds to the current value of the `rivar` (from the prop). If a user change is detected in the value, you can call the `this.change()` method.
+To implement your custom component, you can extend the `RIVarComponent` class and override the `render()` function based on your specific requirements. Within the `render()` function, you can determine the content to be rendered based on the `this.state.value`, which corresponds to the current value of the `rivar` (from the `prop`). If a user change is detected in the value, you can call the `this.change()` method.
 
 
 ```
