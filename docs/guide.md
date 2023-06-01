@@ -111,11 +111,8 @@ class MyRIVarComponent extends RIVarComponent {
 
 
 ## Binding with pure JavaScript
-Like connecting [Subject](https://rxjs.dev/guide/subject) of RxJS from which RIVar is derived.<br>
-A full example is available in
-https://rivarx.github.io/Evaluation/RIVar/DrugAdministration.html. (by "view source")
 
-Each of the lifted variables need to be connected to a visual element.
+The following code initiates a connection between an instance of `RIVar` to an `HTML` element.
 
 ```
     function bind(inputID, variable) {
