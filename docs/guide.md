@@ -134,25 +134,30 @@ The following code initiates a connection between an instance of `RIVar` to an `
 
     }
 ```
+# Examples
+
+[Example React](https://github.com/RIVarX/rivarjs/tree/172eae3fb4601723c7d306af384f98bd7cb7dccf/Examples/react_rivar_drug_administration)
+
+[Example pure JavaScript](https://github.com/RIVarX/Evaluation/raw/main/RIVar/DrugAdministration.html)
 
 
 # Installation
-To use rivarjs, you have two options. First, you can install it using npm by running the following command:<br>
+To use `rivarjs`, you have two options. First, you can install it using `npm` by running the following command:<br>
 
 ```shell
 npm install rivarjs
 ```
 
-Alternatively, for a HTML page, if you may include rivar.umd.js script and the required dependency rxjs:<br>
+Alternatively, for an `HTML` page, you need to include the `rivarjs` script and its required dependency, `RxJS`, by adding the following script tags:<br>
 ```
 <script src="https://unpkg.com/rxjs@^7/dist/bundles/rxjs.umd.min.js"></script>
 <script src="https://unpkg.com/rivarjs/dist/rivar.umd.js"></script>
 ```
-Once you have rivarjs available, you can import the necessary elements in your JavaScript code using the following syntax:<br>
+Once you have `rivarjs` available, you can import the necessary elements in your `JavaScript` code using the following syntax:<br>
 ```
 var { RIVar, lift, Signal } = rivarjs;
 ```
-By following these steps, you will be able to utilize the functionalities provided by the rivarjs library in your JavaScript project.
+By following these steps, you will be able to utilize the functionalities provided by the `rivarjs`.
 
 
 
