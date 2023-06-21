@@ -1,6 +1,6 @@
 {
   "name": "rivarjs",
-  "version": "1.0.17",
+  "version": "1.0.19",
   "description": "Reactive Instance Variable",
   "type": "module",
   "main": "src/index.js",
