@@ -1,4 +1,4 @@
-import { Signal } from 'rivarjs';
+import { Signal } from './Signal.js';
 import { combineLatest, share, Observable, scan, filter, map } from 'rxjs';
 
 const SignalExtension = {
