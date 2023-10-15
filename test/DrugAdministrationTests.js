@@ -1,7 +1,7 @@
 import assert from 'assert';
 import { Signal } from '../src/Signal.js';
 import { RIVar } from '../src/RIVar.js';
-import { lift } from '../src/Expression.js';
+import { lift } from '../src/Lift.js';
 
 const div = (x, y) => x / y;
 const mul = (x, y) => x * y;

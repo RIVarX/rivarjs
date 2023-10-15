@@ -1,9 +1,8 @@
 import assert from 'assert';
 import { Signal } from '../src/Signal.js';
 import { RIVar } from '../src/RIVar.js';
-import { lift } from '../src/Expression.js';
-import { Observable } from 'rxjs';
-import {  combineLatest} from 'rxjs/operators';
+import { lift } from '../src/Lift.js';
+
 
 describe('RIVar', function() {
   describe('SimpleUsage', function() {
