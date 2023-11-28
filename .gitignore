@@ -130,5 +130,9 @@ out
 .pnp.*
 
 dist/
-core/
-integration/
+/core/
+!src/core/
+
+/integration/
+!src/integration/
+
