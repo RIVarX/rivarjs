@@ -1,7 +1,7 @@
 
 
 export default {
-  input: ['src/index.js'],
+  input: ['src/core/index.js'],
   output: {
     file: 'dist/rivar.umd.js',
     format: 'umd',

@@ -1,0 +1,9 @@
+.vs
+/src
+/test
+/docs
+/samples
+LICENSE
+.gitignore
+rollup.config.js
+README.md

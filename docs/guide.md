@@ -76,16 +76,16 @@ Classes can be created as a unit of information, containing *private* variables 
   }
 ```
 
-# Binding
+# Integration
 
 
 
-## Binding in React
+## React
 
 `RIVarView` is a `React component` to render according to a `rivar`
 
 ```
-import { RIVarView } from 'rivarjs/binders/react';
+import { RIVarView } from 'rivarjs/integration/react';
 ```
 
 `RIVarView` takes two props: `rivar` and a `render prop` function. The `render prop` function is used to render the child component. The `render prop` function is passed an object with two properties: `value` and `change`. The `value` property is the current value of the Rivar variable. The `change` function can be used to update the `rivar` variable.
@@ -102,7 +102,7 @@ import { RIVarView } from 'rivarjs/binders/react';
 ```
 
 
-## Binding with pure JavaScript
+## Pure JavaScript
 
 The following code initiates a connection between an instance of `RIVar` to an `HTML` element.
 

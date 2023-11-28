@@ -1,17 +1,19 @@
 {
   "name": "rivarjs",
-  "version": "1.0.20",
+  "version": "1.0.30",
   "description": "Reactive Instance Variable",
   "type": "module",
-  "main": "src/index.js",
-  
+  "main": "core/index.js",
   "scripts": {
     "test": "mocha",
-    "build": "npm run test && rollup -c"
+    "build": "rollup -c && npx babel src/core --out-dir core && npx babel src/integration/react --out-dir integration/react --presets=@babel/preset-react"
   },
   "author": "Rivka Altshuler",
   "license": "ISC",
   "devDependencies": {
+    "@babel/cli": "^7.23.4",
+    "@babel/core": "^7.23.3",
+    "@babel/preset-react": "^7.23.3",
     "chai": "^4.3.7",
     "mocha": "^10.2.0",
     "rollup": "^3.21.5"
@@ -22,13 +24,5 @@
   "peerDependencies": {
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
-  },
-  "peerDependenciesMeta": {
-    "react": {
-      "optional": true
-    },
-    "react-dom": {
-      "optional": true
-    }
   }
 }
