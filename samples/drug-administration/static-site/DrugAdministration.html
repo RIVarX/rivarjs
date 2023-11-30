@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Drug Administration</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      margin: auto;
+    }
+
+    td {
+      border: 1px solid black;
+      padding: 5px;
+      text-align: center;
+    }
+
+    input {
+      border: none;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    input[type="number"] {
+      width: 60px;
+    }
+
+    input[readonly] {
+      font-style: italic;
+    }
+  </style>
+  <script src="https://unpkg.com/rxjs@^7/dist/bundles/rxjs.umd.min.js"></script>
+  <script src="https://unpkg.com/rivarjs/dist/rivar.umd.js"></script>
+
+  <script>
+    var { RIVar, lift, Signal } = rivarjs;
+
+    const div = (x, y) => (x / y).toFixed(2);
+    const mul = (x, y) => x * y;
+  </script>
+
+  <script src="Bag.js"></script>
+  <script src="Pump.js"></script>
+
+  <script>
+
+    function bind(inputID, variable) {
+
+      var input = document.getElementById(inputID);
+
+      input.addEventListener('input', (event) => {
+        const value = event.target.value;
+        variable.next(new Signal(value));
+        input.style.fontStyle = "normal";
+      });
+
+      variable.subscribe((signal) => {
+        if (input.value !== signal.value.toString()) {
+          input.value = signal.value.toString();
+          input.style.fontStyle = "italic";
+        }
+      });
+
+    }
+
+  </script>
+
+</head>
+
+<body>
+  <table>
+    <tr>
+      <td>Drug</td>
+      <td>Concentration</td>
+      <td>VolumeOfFluid</td>
+    </tr>
+    <tr>
+      <td><input id="drug" type="number"></td>
+      <td><input id="concentration" type="number" step="0.01"></td>
+      <td><input id="volume" type="number"></td>
+    </tr>
+    <tr>
+      <td>Dose</td>
+      <td>Duration</td>
+      <td>Rate</td>
+    </tr>
+    <tr>
+      <td><input id="dose" type="number"></td>
+      <td><input id="duration" type="number"></td>
+      <td><input id="rate" type="number"></td>
+    </tr>
+  </table>
+
+
+
+
+  <script>
+
+    const bag = new Bag();
+    const pump = new Pump(bag);
+
+    bind("drug", bag.amount)
+    bind("concentration", bag.concentration)
+    bind("volume", bag.volume)
+    bind("dose", pump.dose)
+    bind("duration", pump.duration)
+    bind("rate", pump.rate)
+
+
+    document.getElementById("volume").value = 300;
+    document.getElementById("drug").value = 100;
+    document.getElementById("duration").value = 10;
+    bag.volume.next(new Signal(300));
+    bag.amount.next(new Signal(100));
+    pump.duration.next(new Signal(10));
+
+  </script>
+
+
+
+</body>
+
+</html>

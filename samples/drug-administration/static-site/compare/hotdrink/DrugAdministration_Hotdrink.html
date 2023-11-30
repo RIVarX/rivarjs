@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Drug Administration</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      margin: auto;
+    }
+
+    td {
+      border: 1px solid black;
+      padding: 5px;
+      text-align: center;
+    }
+
+    input {
+      border: none;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    input[type="number"] {
+      width: 60px;
+    }
+
+    input[readonly] {
+      font-style: italic;
+    }
+  </style>
+
+  <script type="text/javascript" src="hotdrink.min.js.download"></script>
+
+  <script type="text/javascript">
+    function prod(a, b) { return a * b; }
+    function quot(a, b) { return (a / b).toFixed(2); }
+
+    var model = new hd.ModelBuilder()
+      .variables({
+        concentration: undefined,
+        dose: undefined,
+        rate: undefined,
+        volume: 300,
+        drug: 100,
+        duration: 10
+
+      })
+
+      .constraint('drug, volume, concentration')
+      .method('drug, concentration -> volume', prod)
+      .method('volume, concentration -> drug', quot)
+      .method('drug, volume -> concentration', quot)
+
+      .constraint('volume, duration, rate')
+      .method('volume, rate -> duration', quot)
+      .method('duration, rate -> volume', prod)
+      .method('volume, duration -> rate', quot)
+
+      .constraint('drug, duration, dose')
+      .method('drug, dose -> duration', quot)
+      .method('duration, dose -> drug', prod)
+      .method('drug, duration -> dose', quot)
+
+
+      .end();
+
+    var system = new hd.ConstraintSystem();
+    system.addComponent(model);
+
+    window.addEventListener('load', function () {
+      hd.performDeclaredBindings(model);
+    });
+  </script>
+
+ 
+</head>
+
+<body>
+  <table>
+    <tr>
+      <td>Drug</td>
+      <td>Concentration</td>
+      <td>Volume of Fluid</td>
+    </tr>
+    <tr>
+      <td><input id="drug" type="number" data-bind="hd.numVar(drug)"></td>
+      <td><input id="concentration" type="number" step="0.01" data-bind="hd.numVar(concentration)"></td>
+      <td><input id="volume" type="number" data-bind="hd.numVar(volume)"></td>
+    </tr>
+    <tr>
+      <td>Dose</td>
+      <td>Duration</td>
+      <td>Rate</td>
+    </tr>
+    <tr>
+      <td><input id="dose" type="number" data-bind="hd.numVar( dose )"></td>
+      <td><input id="duration" type="number" data-bind="hd.numVar( duration )"></td>
+      <td><input id="rate" type="number" data-bind="hd.numVar( rate )"></td>
+    </tr>
+  </table>
+
+</body>
+<script>
+
+  // Get the descriptor for the "value" property
+  const valueDescriptor = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, "value");
+  
+  // Store references to the original property functions
+  const originalGet = valueDescriptor.get;
+  const originalSet = valueDescriptor.set;
+  
+  function RedefineValueSetProperty(inputElement, theNewFunction) {
+    Object.defineProperty(inputElement, "value", {
+      get: function () {
+        return originalGet.call(this);
+      },
+      set: function (newValue) {
+        theNewFunction({field:this.id, value:newValue});
+        originalSet.call(this, newValue);
+      },
+    });
+  }
+ // Array.from(document.getElementsByTagName('input')).forEach(RedefineValueProperty);
+  
+  const inputElements = document.getElementsByTagName('input');
+
+  Array.from(inputElements).forEach((input) => {
+    input.addEventListener('change', event=> Broadcast({field:input.id, value: event.target.value, type:'input'}));
+    RedefineValueSetProperty(input, ({field,value})=> Broadcast({field, value, type:'recalculate'}) );
+    
+});
+
+  
+function Broadcast({field, value, type}){
+  console.log({field, value, type});
+  window.top.postMessage({field, value, type}, '*');
+}
+
+  
+  
+  
+    </script>
+</html>
