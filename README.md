@@ -90,7 +90,7 @@ Classes can be created as a unit of information, containing *private* variables 
 import { RIVarView } from 'rivarjs/integration/react';
 ```
 
-`RIVarView` takes two props: `rivar` and a `render prop` function. The `render prop` function is used to render the child component. The `render prop` function is passed an object with two properties: `value` and `change`. The `value` property is the current value of the Rivar variable. The `change` function can be used to update the `rivar` variable.
+`RIVarView` takes two props: `rivar` and a `render prop` function. The `render prop` function is used to render the child component. The `render prop` function is passed an object with two properties: `value` and `change`. The `value` property is the current value of the `rivar`. The `change` function can be used to update the `rivar` variable.
 
 
 ```
