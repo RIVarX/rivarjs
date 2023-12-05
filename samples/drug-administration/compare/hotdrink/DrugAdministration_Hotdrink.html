@@ -102,44 +102,5 @@
   </table>
 
 </body>
-<script>
 
-  // Get the descriptor for the "value" property
-  const valueDescriptor = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, "value");
-  
-  // Store references to the original property functions
-  const originalGet = valueDescriptor.get;
-  const originalSet = valueDescriptor.set;
-  
-  function RedefineValueSetProperty(inputElement, theNewFunction) {
-    Object.defineProperty(inputElement, "value", {
-      get: function () {
-        return originalGet.call(this);
-      },
-      set: function (newValue) {
-        theNewFunction({field:this.id, value:newValue});
-        originalSet.call(this, newValue);
-      },
-    });
-  }
- // Array.from(document.getElementsByTagName('input')).forEach(RedefineValueProperty);
-  
-  const inputElements = document.getElementsByTagName('input');
-
-  Array.from(inputElements).forEach((input) => {
-    input.addEventListener('change', event=> Broadcast({field:input.id, value: event.target.value, type:'input'}));
-    RedefineValueSetProperty(input, ({field,value})=> Broadcast({field, value, type:'recalculate'}) );
-    
-});
-
-  
-function Broadcast({field, value, type}){
-  console.log({field, value, type});
-  window.top.postMessage({field, value, type}, '*');
-}
-
-  
-  
-  
-    </script>
 </html>
