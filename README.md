@@ -88,17 +88,20 @@ Classes contain  *private*  assignments along with *public* variables. The assig
 import { RIVarView } from 'rivarjs/integration/react';
 ```
 
-`RIVarView` takes two props: `rivar` and a `render prop` function. The `render prop` function is used to render the child component. The `render prop` function is passed an object with two properties: `value` and `change`. The `value` property is the current value of the `rivar`. The `change` function can be used to update the `rivar` variable.
+`RIVarView` takes `prop` `rivar` and  `children prop` of  a `render` function. The `render` function returns `JSX` of a `react` component according to `value` (at the time of rendering) and `change` (to transfer changes from events to the `rivar`).
 
 
 ```
- <VisualRIVar rivar={rivar} render={({ value, change }) => (
-      <input
+
+  <RIVarView rivar={rivar}>
+    {({ value, change }) => {
+      return <input
         type="number"
         value={value}
         onChange={(event) => change(event.target.value)}
-      />
-    )}>
+      />;
+    }}
+  </RIVarView>
 ```
 
 
