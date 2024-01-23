@@ -129,12 +129,6 @@ The following code initiates a connection between an instance of `RIVar` to an `
 
     }
 ```
-# Examples
-
-[Example React](https://github.com/RIVarX/rivarjs/tree/172eae3fb4601723c7d306af384f98bd7cb7dccf/Examples/react_rivar_drug_administration)
-
-[Example pure JavaScript](https://github.com/RIVarX/Evaluation/raw/main/RIVar/DrugAdministration.html)
-
 
 # Installation
 To use `rivarjs`, you have two options. First, you can install it using `npm` by running the following command:<br>
