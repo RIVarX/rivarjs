@@ -9,7 +9,8 @@ The term *Reactive* signifies that *assignments* initiate dependencies, ensuring
 
 Each variable in `rivarjs` is implemented as an *observable stream* from [RxJS](http://reactivex.io/rxjs). Similarly, the assigned expressions for these variables are also implemented as observable streams. 
 
-To create the variable stream, the streams from the assigned expressions are merged. This merging operation combines the individual streams into a single stream representing the variable. As a result, the variable stream will update and emit new values whenever any of the assigned expression streams produce a new value.
+An observable stream of a variable is created from merging observable streams of assigned expressions.
+As a result, a variable has new values whenever any of the assigned expressions produces a new value.
 
 This design choice enables independent *assignments*, initiating dependencies for continuous updates, for shared variables within multiple contexts.
 
