@@ -2,9 +2,12 @@
 
 This project was bootstrapped with create-react-app ([Create React App](https://github.com/facebook/create-react-app).) followed by installing rivarjs
 
-npx create-react-app drug-administration
-cd drug-administration
-npm install rivarjs
+`npx create-react-app drug-administration`
+
+`cd drug-administration`
+
+`npm install rivarjs`
+
 (we moved the content of drug-administration folder to the current folder)
 
 ## Available Scripts
