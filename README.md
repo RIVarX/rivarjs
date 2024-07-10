@@ -8,7 +8,7 @@ Reactive Instance Variable for JavaScript based on rxjs
 ### 1. Variables
 
 `var myRIVar=new RIVar();`
-### 2. Functions
+### 2. Lift
 
 `var functionOverRIVars=lift((x, y) => x * y, firstRIVar, secondRIVar);`
 ### 3. Assignments
