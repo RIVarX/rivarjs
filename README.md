@@ -72,7 +72,7 @@ Assignments are *extend-only* operators and do not override previous assignments
 
 
 
-#How it Works
+# How it Works
 Each variable is implemented as an *observable stream* from [RxJS](http://reactivex.io/rxjs). Also the assigned expressions for these variables are implemented as observable streams. 
 
 An observable stream of a variable is created from merging observable streams of assigned expressions.
