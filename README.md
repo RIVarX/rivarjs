@@ -19,16 +19,13 @@ It is usually prefered to compose this with the previous step:<br>
 `myRIVar.set(lift((x, y) => x * y, firstRIVar, secondRIVar))`
 
 # Design Philosophy and How it Works
-Assignments are *extend-only* operators and do not override previous assignments. As a result,  classes of OOP with *private* assignments can be easily extended. 
+Assignments are *extend-only* operators and do not override previous assignments. Also, `cycles` (mutual recursion, that variables are declared in terms of each other) are allowed and correct. As a result, classes of OOP with *private* assignments can be easily extended. 
 
 ## How it Works
 Each variable is implemented as an *observable stream* from [RxJS](http://reactivex.io/rxjs). Also the assigned expressions for these variables are implemented as observable streams. 
 
 An observable stream of a variable is created from merging observable streams of assigned expressions.
 As a result, a variable has new values whenever any of the assigned expressions produces a new value.
-
-## Cycles
-According to the presented design `cycles` (mutual recursion) are allowed and correct.
 
 ## Examples
 
