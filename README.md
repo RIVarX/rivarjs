@@ -3,7 +3,7 @@ Reactive Instance Variable for JavaScript based on rxjs
 
 `rivarjs` is a decentralized state management library that automates changes. It harmonizes concepts from the object-oriented programming (OOP) and functional reactive programming (FRP) paradigms. The heart of `rivarjs` lies in the innovative `RIVar` datatype. `RIVar` stands for *Reactive Instance Variable*. This combines *reactive variable* from FRP with *instance variable* (i.e., object's variable) from OOP.
 
-## The API
+# The API
 
 ### 1. Variables
 
@@ -18,8 +18,19 @@ Reactive Instance Variable for JavaScript based on rxjs
 It is usually prefered to compose this with the previous step:<br>
 `myRIVar.set(lift((x, y) => x * y, firstRIVar, secondRIVar))`
 
-## Design Philosophy 
-Assignments are *extend-only* operators and do not override previous assignments. As a result,  classes of OOP with *private* assignments can be easily extended.
+# Design Philosophy and How it Works
+Assignments are *extend-only* operators and do not override previous assignments. As a result,  classes of OOP with *private* assignments can be easily extended. 
+
+## How it Works
+Each variable is implemented as an *observable stream* from [RxJS](http://reactivex.io/rxjs). Also the assigned expressions for these variables are implemented as observable streams. 
+
+An observable stream of a variable is created from merging observable streams of assigned expressions.
+As a result, a variable has new values whenever any of the assigned expressions produces a new value.
+
+## Cycles
+According to the presented design `cycles` (mutual recursion) are allowed and correct.
+
+## Examples
 
 ### Composition
 
@@ -68,12 +79,7 @@ Assignments are *extend-only* operators and do not override previous assignments
   }
 ```
 
-## How It Works
 
-Each variable is implemented as an *observable stream* from [RxJS](http://reactivex.io/rxjs). Also the assigned expressions for these variables are implemented as observable streams. 
-
-An observable stream of a variable is created from merging observable streams of assigned expressions.
-As a result, a variable has new values whenever any of the assigned expressions produces a new value.
 
 
 
