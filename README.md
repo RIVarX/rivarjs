@@ -18,18 +18,10 @@ Reactive Instance Variable for JavaScript based on rxjs
 It is usually prefered to compose this with the previous step:<br>
 `myRIVar.set(lift((x, y) => x * y, firstRIVar, secondRIVar))`
 
-## How It Works
+## Design Philosophy 
+Assignments are *extend-only* operators and do not override previous assignments. As a result,  classes of OOP with *private* assignments can be easily extended.
 
-Each variable in `rivarjs` is implemented as an *observable stream* from [RxJS](http://reactivex.io/rxjs). Similarly, the assigned expressions for these variables are also implemented as observable streams. 
-
-An observable stream of a variable is created from merging observable streams of assigned expressions.
-As a result, a variable has new values whenever any of the assigned expressions produces a new value.
-
-This design choice enables independent *assignments*, initiating dependencies for continuous updates.
-
-## OOP
-
-Classes contain  *private*  assignments along with *public* variables. The assignments do not override previous assignments.
+### Composition
 
 ```
  class A {
@@ -38,11 +30,7 @@ Classes contain  *private*  assignments along with *public* variables. The assig
       // you may assign this.firstRIVar
     }
   }
-```
 
-### Composition
-
-```
  class B {
     constructor(a) {
 
@@ -60,6 +48,13 @@ Classes contain  *private*  assignments along with *public* variables. The assig
 ### Inheritance
 
 ```
+ class A {
+    constructor() {
+      this.firstRIVar = new RIVar();   
+      // you may assign this.firstRIVar
+    }
+  }
+
  class B extends A {
 
     constructor(a) {
@@ -72,6 +67,15 @@ Classes contain  *private*  assignments along with *public* variables. The assig
     }
   }
 ```
+
+## How It Works
+
+Each variable is implemented as an *observable stream* from [RxJS](http://reactivex.io/rxjs). Also the assigned expressions for these variables are implemented as observable streams. 
+
+An observable stream of a variable is created from merging observable streams of assigned expressions.
+As a result, a variable has new values whenever any of the assigned expressions produces a new value.
+
+
 
 # Integration
 
