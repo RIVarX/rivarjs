@@ -1,7 +1,7 @@
 # rivarjs
 Reactive Instance Variable for JavaScript based on rxjs
 
-`rivarjs` is a decentralized state management library that automates changes. It harmonizes concepts from the object-oriented programming (OOP) and functional reactive programming (FRP) paradigms. At its core, `rivarjs` introduces a datatype called `RIVar`, which stands for *Reactive Instance Variable*. This combines *reactive variable* from FRP with *instance variable* (i.e., object's variable) from OOP.
+`rivarjs` is a decentralized state management library that automates changes. It harmonizes concepts from the object-oriented programming (OOP) and functional reactive programming (FRP) paradigms. The heart of `rivarjs` lies in the innovative `RIVar` datatype. `RIVar` stands for *Reactive Instance Variable*. This combines *reactive variable* from FRP with *instance variable* (i.e., object's variable) from OOP.
 
 ## The API
 
