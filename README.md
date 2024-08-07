@@ -18,9 +18,6 @@ Reactive Instance Variable for JavaScript based on rxjs
 It is usually prefered to compose this with the previous step:<br>
 `myRIVar.set(lift((x, y) => x * y, firstRIVar, secondRIVar))`
 
-# How it Works
-Each variable is implemented as an *observable stream* from [RxJS](http://reactivex.io/rxjs). Also the assigned expressions for these variables are implemented as observable streams. The observable stream of a variable is created from merging the observable streams of the whole assigned expressions.
-
 # Design Philosophy
 Assignments are *extend-only* operators and do not override previous assignments. Also, *cycles* (mutual recursion, that variables are declared in terms of each other) are allowed and correct. As a result, classes of OOP with *private* assignments can be easily extended. 
 
@@ -72,10 +69,11 @@ Assignments are *extend-only* operators and do not override previous assignments
     }
   }
 ```
+# How it Works
+Each variable is implemented as an *observable stream* from [RxJS](http://reactivex.io/rxjs). Also the assigned expressions for these variables are implemented as observable streams. 
+The observable stream of a variable is created from merging the observable streams of the whole assigned expressions.
 
 # Integration
-
-
 
 ## React
 
