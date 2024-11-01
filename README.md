@@ -1,39 +1,33 @@
 # rivarjs
 Reactive Instance Variable for JavaScript based on rxjs
 
-`rivarjs` is a decentralized state management library that automates changes. It harmonizes concepts from the object-oriented programming (OOP) and functional reactive programming (FRP) paradigms. At its core, `rivarjs` introduces a datatype called `RIVar`, which stands for *Reactive Instance Variable*.<br><br> 
+`rivarjs` is a decentralized state management library that automates changes. It harmonizes concepts from the object-oriented programming (OOP) and functional reactive programming (FRP) paradigms. The heart of `rivarjs` lies in the innovative `RIVar` datatype. `RIVar` stands for *Reactive Instance Variable*. This combines *reactive variable* from FRP with *instance variable* (i.e., object's variable) from OOP.
 
-The term *Reactive* signifies that *assignments* initiate dependencies, ensuring continuous updates in response to changes. The term *Instance* implies the facilitation of *information hiding*, as assignments can be performed *externally*, such that subclasses assign variables of their parents, and composites assign variables of objects they contain.
-
-## How It Works
-
-Each variable in `rivarjs` is implemented as an *observable stream* from [RxJS](http://reactivex.io/rxjs). Similarly, the assigned expressions for these variables are also implemented as observable streams. 
-
-An observable stream of a variable is created from merging observable streams of assigned expressions.
-As a result, a variable has new values whenever any of the assigned expressions produces a new value.
-
-This design choice enables independent *assignments*, initiating dependencies for continuous updates, for shared variables within multiple contexts.
-
-## The API
-
-The API consists of *lifting*.
+# The API
 
 ### 1. Variables
 
 `var myRIVar=new RIVar();`
-### 2. Functions
+### 2. Lift
 
 `var functionOverRIVars=lift((x, y) => x * y, firstRIVar, secondRIVar);`
 ### 3. Assignments
 
 `myRIVar.set(functionOverRIVars);`
 
-It is usually readable to compose this with the previous step:<br>
+It is usually prefered to compose this with the previous step:<br>
 `myRIVar.set(lift((x, y) => x * y, firstRIVar, secondRIVar))`
 
-## OOP
+# Design & Philosophy
+Assignments are *extend-only* operators and do not override previous assignments. Also, *cycles* (mutual recursion, that variables are declared in terms of each other) are allowed and correct. As a result, classes of OOP with *private* assignments can be easily extended. 
 
-Classes contain  *private*  assignments along with *public* variables. The assignments do not override previous assignments.
+## How it Works
+Each variable is implemented as an *observable stream* from [RxJS](http://reactivex.io/rxjs). Also the assigned expressions for these variables are implemented as observable streams. 
+The observable stream of a variable is created from merging the observable streams of the whole assigned expressions.
+
+## Examples
+
+### Composition
 
 ```
  class A {
@@ -42,11 +36,7 @@ Classes contain  *private*  assignments along with *public* variables. The assig
       // you may assign this.firstRIVar
     }
   }
-```
 
-### Inheritance
-
-```
  class B {
     constructor(a) {
 
@@ -61,9 +51,16 @@ Classes contain  *private*  assignments along with *public* variables. The assig
   }
 ```
 
-### Composition
+### Inheritance
 
 ```
+ class A {
+    constructor() {
+      this.firstRIVar = new RIVar();   
+      // you may assign this.firstRIVar
+    }
+  }
+
  class B extends A {
 
     constructor(a) {
@@ -78,8 +75,6 @@ Classes contain  *private*  assignments along with *public* variables. The assig
 ```
 
 # Integration
-
-
 
 ## React
 
@@ -147,7 +142,7 @@ Once you have `rivarjs` available, you can import the necessary elements in your
 ```
 var { RIVar, lift, Signal } = rivarjs;
 ```
-By following these steps, you will be able to utilize the functionalities provided by the `rivarjs`.
+
 
 
 
