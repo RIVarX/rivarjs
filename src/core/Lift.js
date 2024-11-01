@@ -1,5 +1,5 @@
 import { Signal } from './Signal.js';
-import { combineLatest, share, Observable, scan, filter, map } from 'rxjs';
+import { combineLatest, share, Observable, scan, distinctUntilChanged, map } from 'rxjs';
 
 const SignalExtension = {
   produceResult: function (resultSelector, x, y) {
@@ -21,24 +21,11 @@ const SignalExtension = {
 
   monotonic: function (source) {
     return source.pipe(
-      scan((previous, current) => current.compareTo(previous) > 0 ? current : null), filter(x => x != null)
+      scan((previous, current) => current.compareTo(previous) > 0 ? current : previous), distinctUntilChanged()
     );
   },
 
-  selectLatest: function (source, ...moreSources) {
-    const allSources = [...moreSources, source];
-    return SignalExtension.selectLatest(allSources);
-  },
 
-  selectLatest: function (sources) {
-    return Observable.combineLatest(
-      ...sources.map(o => o.startWith(new Signal(undefined, [])))
-    )
-      .map(valuesFromAllSources => Math.max(...valuesFromAllSources.filter(o => o !== undefined)))
-      .distinctUntilChanged((prev, curr) => prev.compareTo(curr) === 0)
-      .publish()
-      .refCount();
-  }
 };
 
 
