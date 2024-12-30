@@ -90,7 +90,7 @@ It is usually prefered to compose this with the previous step:<br>
     }
   }
 ```
-# Integration
+## Integration
 
 ###  React
 
