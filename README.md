@@ -3,7 +3,33 @@ Reactive Instance Variable for JavaScript based on rxjs
 
 `rivarjs` is a decentralized state management library that automates changes. The heart of `rivarjs` lies in an innovative `RIVar` datatype. `RIVar` stands for *Reactive Instance Variable*: a combination  of *Reactive Variable* from FRP with *Instance Variable* (i.e., object's variable) from OOP.
 
-# The API
+## Features
+
+* **Extend-only assignments:** New assignments do not overwrite previous ones, but rather extend them.
+* **Cyclical dependencies:** Variables can be declared in terms of each other, creating a dynamic and responsive system.
+* **Automatic updates:** Changes to any variable automatically propagate to all dependent variables.
+
+The internal implementation is that each variable is an *observable stream* from [RxJS](http://reactivex.io/rxjs). Also the assigned expressions for these variables are implemented as observable streams. The observable stream of a variable is created from merging the observable streams of the whole assigned expressions.
+
+## Installation
+To use `rivarjs`, you have two options. First, you can install it using `npm` by running the following command:<br>
+
+```shell
+npm install rivarjs
+```
+
+Alternatively, for an `HTML` page, you need to include the `rivarjs` script and its required dependency, `RxJS`, by adding the following script tags:<br>
+```
+<script src="https://unpkg.com/rxjs@^7/dist/bundles/rxjs.umd.min.js"></script>
+<script src="https://unpkg.com/rivarjs/dist/rivar.umd.js"></script>
+```
+Once you have `rivarjs` available, you can import the necessary elements in your `JavaScript` code using the following syntax:<br>
+
+```
+var { RIVar, lift, Signal } = rivarjs;
+```
+
+## Usage
 
 ### 1. Variables
 
@@ -17,15 +43,6 @@ Reactive Instance Variable for JavaScript based on rxjs
 
 It is usually prefered to compose this with the previous step:<br>
 `myRIVar.set(lift((x, y) => x * y, firstRIVar, secondRIVar))`
-
-# Design & Philosophy
-Assignments are *extend-only* operators that do not override previous assignments. Also, *cycles* (mutual recursion, that variables are declared in terms of each other) are allowed and correct. As a result, classes of OOP with *private* assignments can be easily extended. 
-
-## How it Works
-Each variable is implemented as an *observable stream* from [RxJS](http://reactivex.io/rxjs). Also the assigned expressions for these variables are implemented as observable streams. 
-The observable stream of a variable is created from merging the observable streams of the whole assigned expressions.
-
-## Examples
 
 ### Composition
 
@@ -73,10 +90,9 @@ The observable stream of a variable is created from merging the observable strea
     }
   }
 ```
-
 # Integration
 
-## React
+###  React
 
 `RIVarView` is a `React component` to render according to a `rivar`
 
@@ -101,7 +117,7 @@ import { RIVarView } from 'rivarjs/integration/react';
 ```
 
 
-## Pure JavaScript
+### Pure JavaScript
 
 The following code initiates a connection between an instance of `RIVar` to an `HTML` element.
 
@@ -126,22 +142,16 @@ The following code initiates a connection between an instance of `RIVar` to an `
     }
 ```
 
-# Installation
-To use `rivarjs`, you have two options. First, you can install it using `npm` by running the following command:<br>
 
-```shell
-npm install rivarjs
-```
 
-Alternatively, for an `HTML` page, you need to include the `rivarjs` script and its required dependency, `RxJS`, by adding the following script tags:<br>
-```
-<script src="https://unpkg.com/rxjs@^7/dist/bundles/rxjs.umd.min.js"></script>
-<script src="https://unpkg.com/rivarjs/dist/rivar.umd.js"></script>
-```
-Once you have `rivarjs` available, you can import the necessary elements in your `JavaScript` code using the following syntax:<br>
-```
-var { RIVar, lift, Signal } = rivarjs;
-```
+
+
+
+
+
+
+
+
 
 
 
