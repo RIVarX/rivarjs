@@ -6,7 +6,7 @@ Reactive Instance Variable for JavaScript based on [RxJS](http://reactivex.io/rx
 ## Features
 
 * **Extend-only assignments:** New assignments do not overwrite previous ones, but rather extend them.
-* **Cyclical dependencies:** Variables can be declared in terms of each other, creating a dynamic and responsive system.
+* **Cyclical dependencies:** Variables can be declared in terms of each other.
 * **Automatic updates:** Changes to any variable automatically propagate to all dependent variables.
 
 The internal implementation is that each variable is an *observable stream* from [RxJS](http://reactivex.io/rxjs). Also the assigned expressions for these variables are implemented as observable streams. The observable stream of a variable is created from merging the observable streams of the whole assigned expressions.
